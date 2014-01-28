@@ -15,13 +15,13 @@ Here are the main parts:
 ##Input data
  * per series
   1. Start date - this is the first Sunday of the series
-  2. Image path - this should be the same for the whole series. It's a graphic the Roku shows to represent each series.
+  2. Image path - this should be the same for the whole series. It's a graphic the Roku shows to represent each series. It needs to be a 304 x 237 pixel .jpg image (not that important but maybe eventually we'll check to see if the image is valid).
   3. Series name - currently this should be entered lower-case, all one word. Eventually we should accept a phrase then convert it to correct format.
  * per week (within a series)
   1. Title - the title of that particular sermon 
   2. ContentID - this is just a 5 digit serial number for the individual video. The ID for the first sermon in a series is 1 more than the last ID in the last series. The sermon ID starts with 1, and worship ID starts with 2 (so if the sermon ContentID is 12345, worshp is 22345). Obviously once we get one ContentID we can generate the IDs for the rest of the series. Eventually we should store this in a database so on a new series we just look up the last ContentID of the previous series.
   3. Synopsis - summary of the sermon including name of the speaker if known (e.g. 'Dave Workman speaks about the power of monkeys')
-  4. Worshp synopsis - summary of worship set including name of worship leader and a list of songs performed
+  4. Worship synopsis - summary of worship set including name of worship leader and a list of songs performed
 
  Anything else we need can be generated from this data. 
 
@@ -40,5 +40,11 @@ The Vineyard Roku channel is controlled by several files:
 [series]: http://vineyardcincinnati.com/roku/renew.xml
 [worship]: http://vineyardcincinnati.com/roku/renewworship.xml
 
-This application should update the categories.xml and index.html files and create 2 new files for each series (sermon and worship). The XML files will be written to disk on the server. This needs a bit of work because the files need to be written to a location *outside* the file tree the web server can read from for security purposes.
+This application should update the categories.xml and index.html files and
+create 2 new files for each series (sermon and worship). The XML files will be
+written to disk on the server. This needs a bit of work because the files need
+to be written to a location the web server can't read from for security
+purposes. I haven't even begun to think of spammer prevention, but we could
+always make the application only available with the Vineyard infrastructure or
+do authentication.
 
