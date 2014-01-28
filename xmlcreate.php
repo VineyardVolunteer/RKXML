@@ -2,8 +2,7 @@
 session_start();
 
 $a = "SELECT html FROM xml_data WHERE id = '".$_POST['id']."'";
-//$b = mysql_connect('jlphotographercom.ipagemysql.com','xmlcreate','KegKing2602359!');
-$b = mysql_connect('localhost','xmlcreate','KegKing2602359!');
+$b = mysql_connect('localhost','xmlcreate','<password>');
 mysql_select_db('xml_data',$b);
 $c = mysql_query($a,$b);
 $d = mysql_fetch_assoc($c);
