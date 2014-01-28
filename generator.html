@@ -1,0 +1,154 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>	
+</head>
+
+<body>
+		
+
+<div id="main">
+	<input type="button" id="btAdd" value="Add Element" class="bt" />
+	<input type="button" id="btRemove" value="Remove Element" class="bt" />
+	<input type="button" id="btRemoveAll" value="Remove All" class="bt" />
+	<br />
+</div>
+
+<div id="showvalues"></div>
+<script>
+$(document).ready(function() {
+			var iCnt = 0; 
+			// CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
+
+				var container = $(document.createElement('div')).css(
+				{
+				padding: '1px', 
+				margin: '1px', 
+				width: '170px', 
+				border: '1px ',
+				borderTopColor: '#999', 
+				borderBottomColor: '#999',
+				borderLeftColor: '#999', 
+				borderRightColor: '#999', 
+				font: '13px verdana'
+				}
+			);
+			
+			$('#btAdd').click(function() { 
+			
+				if (iCnt <= 19) {
+				iCnt = iCnt + 1; 
+				// ADD TEXTBOX.
+				$(container).append('<input type=text class="input" id=tb' + iCnt + ' value="Text Element ' + iCnt + '" />'); 
+					if (iCnt == 1) {  // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+					var divSubmitXML = $(document.createElement('div')); $(divSubmitXML).append('<input type=button class="bt" onclick="GetTextValue()" id=btSubmit value="Generate XML" />'); 
+					var divSubmitHTML = $(document.createElement('div')); $(divSubmitHTML).append('<input type=button class="bt" onclick="GetTextValue2()" id=btSubmitHTML value="Generate HTML" />'); 
+					var divClear = $(document.createElement('div')); $(divClear).append('<input type=button class="bt" onclick="Clear()" id=btClear value="Clear" />'); 
+
+					} 
+				$('#main').after(container, divSubmitXML, divSubmitHTML, divClear);  // add all of these DIV ELEMENTS TO THE "main" CONTAINER.
+				} 
+						
+				else {  // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+				$(container).append('<label>Reached the limit</label>'); 
+				$('#btAdd').attr('class', 'bt-disable'); 
+				$('#btAdd').attr('disabled', 'disabled');
+				}	
+				
+			});
+			
+			
+			$('#btRemove').click(function() {  // REMOVE ELEMENTS ONE PER CLICK.
+				
+				if (iCnt != 0) { 
+				$('#tb' + iCnt).remove(); iCnt = iCnt - 1; 
+				} 
+			
+				if (iCnt == 0) { 
+				$(container).empty(); $(container).remove(); 
+				$('#btSubmit').remove(); 
+				$('#btSubmitHTML').remove(); 
+				$('#btClear').remove(); 
+				$('#btAdd').removeAttr('disabled'); 
+				$('#btAdd').attr('class', 'bt') 
+				Clear()
+				}
+			
+			});
+			
+			
+			$('#btRemoveAll').click(function() {  // REMOVE ALL THE ELEMENTS IN THE CONTAINER.
+			$(container).empty(); 
+			$(container).remove(); 
+			$('#btSubmit').remove(); 
+			$('#btSubmitHTML').remove(); 
+			$('#btClear').remove(); 
+			iCnt = 0; 
+			$('#btAdd').removeAttr('disabled'); 
+			$('#btAdd').attr('class', 'bt');
+			Clear()
+			});
+		
+		}
+	
+	);
+
+
+	// PICK THE VALUES FROM EACH TEXTBOX WHEN "SUBMIT" BUTTON IS CLICKED.
+
+	var divValue, values = ''; 
+	function GetTextValue() {
+		$(divValue).empty(); 
+		$(divValue).remove(); 
+			values = 'Beginning part of XML file' + '<br />' + '<br />'; $('.input').each(function() { 
+				divValue = $(document.createElement('div')).css({
+				padding: '5px'
+				}); 
+			values +='Random XML '	+ '<br />'
+			values += this.value + '<br />'
+			values +='More Random XML '	+ '<br />' + '<br />'
+			})
+			values +='End part of XML file '
+			;
+		
+		$(divValue).append(values);
+		$('#showvalues').append(divValue);
+	
+	}
+	
+
+	var divValue, values = ''; 
+	function GetTextValue2() {
+		$(divValue).empty(); 
+		$(divValue).remove(); 
+			values = 'Beginning part of HTML file' + '<br />' + '<br />'; $('.input').each(function() { 
+				divValue = $(document.createElement('div')).css({
+				padding: '5px' 
+				}); 
+			values +='Random HTML '	+ '<br />'
+			values += this.value + '<br />'
+			values +='More Random HTML '	+ '<br />' + '<br />'
+			})
+			values +='End part of HTML file '
+			;
+		
+		$(divValue).append(values);
+		$('#showvalues').append(divValue);
+	
+	}
+	
+	function Clear() {
+		$(divValue).empty(); 
+		$(divValue).remove(); 
+		$('#showvalues');
+	}
+	
+	
+	
+</script>
+
+
+</body>
+
+</html>
