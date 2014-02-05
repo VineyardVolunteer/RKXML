@@ -4,8 +4,10 @@
 <link rel="stylesheet" type="text/css" href="xmlgen.css"/>
 <script type="text/javascript" src="js_lib/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-function select_weeks(id)
-{
+/*
+        Replace this long XMLRequest
+
+
 var httpreq = new XMLHttpRequest();
 var url = "xmlcreate.php";
 var selectid = document.getElementById(id);
@@ -19,7 +21,30 @@ if (httpreq.readyState == 4 && httpreq.status == 200) {
 status.innerHTML = httpreq.responseText;
 }
 }
+
+
+*/
+
+
+/*
+       replace long XMLRequest With this shorter one
+        
+$.post('xmlgen.php',{ id: id }, 
+function(output) {
+$("#output").html(output);
+});
+
+
+*/
+
+function select_weeks(id)
+{
+$.post('xmlgen.php',{ id: id }, 
+function(output) {
+$("#output").html(output);
+});
 }
+
 </script>
 </head>
 <body>
