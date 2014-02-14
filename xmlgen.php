@@ -52,9 +52,24 @@ $("#output").html(output);
 <center><img src="xml_images/vineyard_logo.jpg"/></center>
 <div id="title">Vineyard Cincinnati XML Creator</div>
 
+/*
+shorten the below command
+
+from
+<select id="week_series" onchange="select_weeks('week_series')">
+
+to
+<select onchange="select_weeks('this.value')">
+
+will also eliminate having a couple of lines to pull the value from through the function
+var selectid = document.getElementById(id);
+var id = selectid.options[selectid.selectedIndex].value;
+
+*/
+
 <div id="weeks">
 How many weeks in the series ?
-<select id="week_series" onchange="select_weeks('week_series')">
+<select onchange="select_weeks('this.value')">
 <option>Please Select</option>
 <option value="1">1</option>
 <option value="2">2</option>
